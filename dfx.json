@@ -1,0 +1,45 @@
+{
+  "canisters": {
+    "pool": {
+      "type": "rust",
+      "package": "pool",
+      "candid": "src/pool/pool.did"
+    },
+    "governance": {
+      "type": "rust",
+      "package": "governance",
+      "candid": "src/governance/governance.did"
+    },
+    "cover": {
+      "type": "rust",
+      "package": "cover",
+      "candid": "src/cover/cover.did"
+    },
+    "bqbtc": {
+      "type": "rust",
+      "package": "bqbtc",
+      "candid": "src/bqbtc/bqbtc.did"
+    },
+    "smartcontract_frontend": {
+      "dependencies": [
+        "bqbtc",
+        "governance",
+        "cover",
+        "pool"
+      ],
+      "source": [
+        "src/smartcontract_frontend/dist"
+      ],
+      "type": "assets",
+      "workspace": "smartcontract_frontend"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}

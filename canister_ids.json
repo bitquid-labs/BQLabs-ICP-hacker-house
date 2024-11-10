@@ -1,0 +1,17 @@
+{
+  "bqbtc": {
+    "ic": "ehul3-6aaaa-aaaan-qzouq-cai"
+  },
+  "cover": {
+    "ic": "eoxah-iiaaa-aaaan-qzova-cai"
+  },
+  "governance": {
+    "ic": "ejwgt-fqaaa-aaaan-qzovq-cai"
+  },
+  "pool": {
+    "ic": "e4rx6-eyaaa-aaaan-qzowa-cai"
+  },
+  "smartcontract_frontend": {
+    "ic": "e3qrk-jaaaa-aaaan-qzowq-cai"
+  }
+}

@@ -1,0 +1,51 @@
+type Proposal = record {
+  id : nat;
+  status : ProposalStatus;
+  proposal_param : ProposalParam;
+  voters_against : vec principal;
+  deadline : nat;
+  created_at : nat;
+  voters_for : vec principal;
+  votes_for : nat;
+  executed : bool;
+  votes_against : nat;
+  timeleft : nat;
+};
+type ProposalParam = record {
+  user : principal;
+  description : text;
+  pool_id : nat;
+  cover_id : nat;
+  claim_amount : nat;
+  tx_hash : text;
+  risk_type : RiskType;
+};
+type ProposalStatus = variant {
+  Claimed;
+  Approved;
+  Rejected;
+  Submitted;
+  Pending;
+};
+type Result = variant { Ok; Err : text };
+type Result_1 = variant { Ok : vec Proposal; Err : text };
+type Result_2 = variant { Ok : vec principal; Err : text };
+type Result_3 = variant { Ok : nat; Err : text };
+type Result_4 = variant { Ok : Proposal; Err : text };
+type RiskType = variant { Stablecoin; Slashing; SmartContract; Protocol };
+service : (principal, principal, principal, nat64) -> {
+  addAdmin : (principal) -> (Result);
+  createProposal : (ProposalParam) -> (Result);
+  executeProposal : (nat) -> (Result);
+  getActiveProposals : () -> (Result_1) query;
+  getAllParticipants : () -> (Result_2) query;
+  getAllProposals : () -> (Result_1) query;
+  getPastProposals : () -> (Result_1) query;
+  getProposalCount : () -> (Result_3) query;
+  getProposalDetails : (nat) -> (Result_4) query;
+  getUserParticipation : (principal) -> (Result_3) query;
+  setVotingDuration : (nat64) -> (Result);
+  updateProposalStatusToClaimed : (nat) -> (Result);
+  updateRewardAmount : (nat) -> (Result);
+  vote : (nat, bool) -> (Result);
+}

@@ -1,0 +1,49 @@
+type Cover = record {
+  id : nat;
+  cid : text;
+  cover_name : text;
+  cost : nat;
+  cover_values : nat;
+  capacity_amount : nat;
+  chains : text;
+  capacity : nat;
+  pool_id : nat;
+  risk_type : RiskType;
+  max_amount : nat;
+};
+type GenericCoverInfo = record {
+  cover_name : text;
+  end_day : nat;
+  cover_period : nat;
+  user : principal;
+  claim_paid : nat;
+  cover_value : nat;
+  is_active : bool;
+  cover_id : nat;
+  risk_type : RiskType;
+};
+type Result = variant { Ok; Err : text };
+type Result_1 = variant { Ok : vec Cover; Err : text };
+type Result_2 = variant { Ok : vec principal; Err : text };
+type Result_3 = variant { Ok : vec GenericCoverInfo; Err : text };
+type Result_4 = variant { Ok : Cover; Err : text };
+type Result_5 = variant { Ok : nat; Err : text };
+type Result_6 = variant { Ok : GenericCoverInfo; Err : text };
+type RiskType = variant { Stablecoin; Slashing; SmartContract; Protocol };
+service : (principal, principal, principal, principal) -> {
+  claimPayoutForLP : (nat) -> (Result);
+  createCover : (nat, text, RiskType, text, text, nat, nat, nat) -> (Result);
+  deleteExpiredUserCovers : (principal) -> (Result);
+  getAllAvailableCovers : () -> (Result_1) query;
+  getAllParticipants : () -> (Result_2) query;
+  getAllUserCovers : (principal) -> (Result_3) query;
+  getCoverInfo : (nat) -> (Result_4) query;
+  getDepositClaimableDays : (principal, nat) -> (Result_5) query;
+  getLastClaimTime : (principal, nat) -> (Result_5) query;
+  getUserCoverInfo : (principal, nat) -> (Result_6) query;
+  getUserParticipation : (principal) -> (Result_5) query;
+  purchaseCover : (nat, nat, nat, nat) -> (Result);
+  updateCover : (nat, text, RiskType, text, text, nat, nat, nat) -> (Result);
+  updateMaxAmount : (nat) -> (Result);
+  updateUserCoverValue : (principal, nat, nat) -> (Result);
+}
